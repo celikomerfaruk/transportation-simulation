@@ -3,8 +3,17 @@
 
 package containers;
 
-public class RefrigeratedContainer {
-
+public class RefrigeratedContainer extends HeavyContainer {
+	public RefrigeratedContainer(int ID , int weight) {
+		super(ID, weight);
+		
+	}
+	public double consumption() {
+		return 5.00 ;
+	} 
+	public  String getType() {
+		return "refrigerator" ;
+	}
 }
 
 
