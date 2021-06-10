@@ -17,6 +17,7 @@ import java.util.Scanner;
 import org.junit.platform.engine.support.hierarchical.ForkJoinPoolHierarchicalTestExecutorService;
 
 public class Main {
+	
 	public static void main(String[] args) throws FileNotFoundException {
 		
 		//
@@ -43,7 +44,6 @@ public class Main {
 		
 		
 		
-		
 		for(int i = 0; i < actionCount ; i++) {
 			actions[i]  = in.nextLine();
 				
@@ -66,7 +66,8 @@ public class Main {
 				if(actions[i].split(" ").length == 4) {
 					if ("R".equals(actions[i].split(" ")[3]))
 						
-					   {allPorts.get(Integer.parseInt(actions[i].split(" ")[1])).containers.add(new RefrigeratedContainer(containerID ,Integer.parseInt(actions[i].split(" ")[2])))  ;
+					   {
+						allPorts.get(Integer.parseInt(actions[i].split(" ")[1])).containers.add(new RefrigeratedContainer(containerID ,Integer.parseInt(actions[i].split(" ")[2])))  ;
 						allContainers.add(allPorts.get(Integer.parseInt(actions[i].split(" ")[1])).containers.get(allPorts.get(Integer.parseInt(actions[i].split(" ")[1])).containers.size()-1));
 					   }
 		 
@@ -109,14 +110,18 @@ public class Main {
 		}      
 		
 		
+		
+		
+		
 		for(int i = 0 ; i< allPorts.size() ; i++) {
 			if( i != 0 ) {
 			   out.print("\n"); }
 			out.printf("Port " + i + ": (%.2f" + ", %.2f" + ")",allPorts.get(i).getX() , allPorts.get(i).getY());
-			out.print("\n");
+			
 			for(int k = 0 ; k < allPorts.get(i).containers.size() ; k++) 
 			{
 				if ("basic".equals(allPorts.get(i).containers.get(k).getType())) {
+					out.print("\n");
 					out.print("  BasicContainer:") ;
 					break;
 				}

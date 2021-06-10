@@ -4,6 +4,7 @@
 package ports;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import containers.Container;
 import interfaces.IPort;
@@ -32,8 +33,23 @@ public class Port implements IPort {
 	}
 	public void incomingShip(Ship s) {
 		if (current.contains(s) == false) {
-			current.add(s);
-		}
+				if (current.size()>0) {
+					for(int i = 0 ; i < current.size() ; i++) {
+						if (s.getID()<current.get(i).getID()) {
+							current.add(i, s);
+							break;
+						}
+					}
+				}
+				if (current.contains(s) == false) {
+					current.add(s);
+				}
+					
+			
+				
+			}
+		
+		
 	};
 	
 	public void outgoingShip(Ship s) {

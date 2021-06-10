@@ -49,15 +49,16 @@ public class Ship implements IShip {
 	}
 	
 	public ArrayList<Container> getCurrentContainers(){
+		
 		return liftingContainers;
 	}
 	public boolean sailTo(Port p) {
-		double containerRates = 0;
+		double containerRates = 0.0;
 		 for(int i = 0 ; i < this.liftingContainers.size() ; i++) {
-			 containerRates += this.liftingContainers.get(i).consumption();
+			 containerRates += ((this.liftingContainers.get(i).consumption())*(this.liftingContainers.get(i).getWeight()));
 		 }
-		if (fuel >= (this.currentPort.getDistance(p))*(this.fuelConsumptionPerKM + containerRates) ) {
-			fuel -= (this.currentPort.getDistance(p))*(this.fuelConsumptionPerKM + containerRates) ;
+		if (fuel >= ((this.currentPort.getDistance(p))*(this.fuelConsumptionPerKM + containerRates)) ) {
+			fuel -= ((this.currentPort.getDistance(p))*(this.fuelConsumptionPerKM + containerRates)) ;
 			this.currentPort.outgoingShip(this);
 			this.currentPort = p;
 			p.incomingShip(this);
@@ -85,7 +86,19 @@ public class Ship implements IShip {
 									currentLiftingHeavyContainers++;
 									currentLiftingAllContainers++;
 									currentLiftingWeight+= cont.getWeight();
-									liftingContainers.add(cont);
+									if (liftingContainers.contains(cont) == false) {
+										if (liftingContainers.size()>0) {
+											for(int i = 0 ; i <liftingContainers.size() ; i++) {
+												if (cont.getID()<liftingContainers.get(i).getID()) {
+													liftingContainers.add(i, cont);
+													break;
+												}
+											}
+										}
+									}
+										if (liftingContainers.contains(cont) == false) {
+											liftingContainers.add(cont);
+										}
 									currentPort.containers.remove(cont);
 									return true;
 								}
@@ -96,7 +109,22 @@ public class Ship implements IShip {
 									currentLiftingHeavyContainers++;
 									currentLiftingAllContainers++;
 									currentLiftingWeight+= cont.getWeight();
-									liftingContainers.add(cont);
+									
+									if (liftingContainers.contains(cont) == false) {
+										if (liftingContainers.size()>0) {
+											for(int i = 0 ; i <liftingContainers.size() ; i++) {
+												if (cont.getID()<liftingContainers.get(i).getID()) {
+													liftingContainers.add(i, cont);
+													break;
+												}
+											}
+										}
+									}
+										if (liftingContainers.contains(cont) == false) {
+											liftingContainers.add(cont);
+										}
+									
+									
 									currentPort.containers.remove(cont);
 									return true ;
 								}
@@ -105,7 +133,19 @@ public class Ship implements IShip {
 								currentLiftingAllContainers++;
 								currentLiftingHeavyContainers++;
 								currentLiftingWeight += cont.getWeight(); 
-								liftingContainers.add(cont);
+								if (liftingContainers.contains(cont) == false) {
+									if (liftingContainers.size()>0) {
+										for(int i = 0 ; i <liftingContainers.size() ; i++) {
+											if (cont.getID()<liftingContainers.get(i).getID()) {
+												liftingContainers.add(i, cont);
+												break;
+											}
+										}
+									}
+								}
+									if (liftingContainers.contains(cont) == false) {
+										liftingContainers.add(cont);
+									}
 								currentPort.containers.remove(cont);
 								return true;
 							}
@@ -114,7 +154,19 @@ public class Ship implements IShip {
 					else {
 						currentLiftingAllContainers++;
 						currentLiftingWeight+= cont.getWeight();
-						liftingContainers.add(cont);
+						if (liftingContainers.contains(cont) == false) {
+							if (liftingContainers.size()>0) {
+								for(int i = 0 ; i <liftingContainers.size() ; i++) {
+									if (cont.getID()<liftingContainers.get(i).getID()) {
+										liftingContainers.add(i, cont);
+										break;
+									}
+								}
+							}
+						}
+							if (liftingContainers.contains(cont) == false) {
+								liftingContainers.add(cont);
+							}
 						currentPort.containers.remove(cont);
 						return true;
 					}
@@ -122,12 +174,12 @@ public class Ship implements IShip {
 	
 					}
 				}
-			}
+			};
 			
 		
 		return false;
 		
-	};
+	}
 	
 	public int getID() {
 		return ID ;
@@ -140,12 +192,25 @@ public class Ship implements IShip {
 	public boolean unLoad(Container cont) {
 		if (liftingContainers.contains(cont)){
 			if(currentPort.containers.contains(cont) == false) {
-				currentPort.containers.add(cont);
+
+				if (currentPort.containers.size()>0) {
+					for(int i = 0 ; i < currentPort.containers.size() ; i++) {
+						if (cont.getID()<currentPort.containers.get(i).getID()) {
+							currentPort.containers.add(i, cont);
+							break;
+						}
+					}
+				}
+				if (currentPort.containers.contains(cont) == false) {
+					currentPort.containers.add(cont);
+				}
 			}
+			liftingContainers.remove(cont);
 			if("heavy".equals(cont.getType())) {
 				currentLiftingAllContainers--;
 				currentLiftingHeavyContainers--;
 				currentLiftingWeight-= cont.getWeight();
+				
 			}
 			if("liquid".equals(cont.getType())) {
 				currentLiftingAllContainers--;
