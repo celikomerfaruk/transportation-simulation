@@ -16,8 +16,17 @@ import java.util.Scanner;
 
 import org.junit.platform.engine.support.hierarchical.ForkJoinPoolHierarchicalTestExecutorService;
 
+/**
+ * The class that prints the output after reading the input and performing the necessary operations and calculations.
+ * @author celik
+ *
+ */
 public class Main {
-	
+	/**
+	 * The method that prints the output after reading the input and performing the necessary operations and calculations.
+	 * @param args Receives two arguments: path to input file and path to output file.
+	 * @throws FileNotFoundException Action to be taken in case of a possible file not found error.
+	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		
 		//
@@ -29,37 +38,69 @@ public class Main {
 		// Good Luck!
 		// 
 		
+		/**
+		 * Reads the input file.
+		 */
 		Scanner in = new Scanner(new File(args[0]));
+		/**
+		 * Prints the output file.
+		 */
 		PrintStream out = new PrintStream(new File(args[1]));
-		
+		/**
+		 * ArrayList containing all created ports.
+		 */
 		ArrayList<Port> allPorts = new ArrayList<Port>() ;
+		/**
+		 * ArrayList containing all created ships.
+		 */
 		ArrayList<Ship> allShips = new ArrayList<Ship>() ;
+		/**
+		 * ArrayList containing all created containers.
+		 */
 		ArrayList<Container> allContainers = new ArrayList<Container>()	;	
-		int actionCount = in.nextInt();
+		/**
+		 * Number of actions.
+		 */
+		final int actionCount = in.nextInt();
 		in.nextLine();
+		
+		/**
+		 * List of actions line by line.
+		 */
+		
 		String[] actions = new String[actionCount];
+		/**
+		 * Variable that will give id values â€‹â€‹to containers
+		 */
 		int containerID = 0 ;
+		/**
+		 * Variable that will give id values â€‹â€‹to ports.
+		 */
 		int portID = 0 ;
+		/**
+		 * Variable that will give id values â€‹â€‹to ships.
+		 */
 		int shipID = 0;
 		
 		
+		//Reading phase.
 		
 		for(int i = 0; i < actionCount ; i++) {
 			actions[i]  = in.nextLine();
 				
-			if("3".equals(actions[i].split(" ")[0])) {             //port oluþturuyoruz
+			if("3".equals(actions[i].split(" ")[0])) {             
 			allPorts.add(new Port(portID , Double.parseDouble(actions[i].split(" ")[1]), Double.parseDouble(actions[i].split(" ")[2]) )) ;
 			portID++;
 			}
 			
-			if("2".equals(actions[i].split(" ")[0]))   {            //ship oluþturuyoruz
+			if("2".equals(actions[i].split(" ")[0]))   {           
 				allShips.add(new Ship(shipID,allPorts.get(Integer.parseInt(actions[i].split(" ")[1])),Integer.parseInt(actions[i].split(" ")[2]), Integer.parseInt(actions[i].split(" ")[3]),Integer.parseInt(actions[i].split(" ")[4]),Integer.parseInt(actions[i].split(" ")[5]),Integer.parseInt(actions[i].split(" ")[6]),Double.parseDouble(actions[i].split(" ")[7]) )) ;
 				shipID++;
 			}
 			
 			
 			
-			if("1".equals(actions[i].split(" ")[0])) {    //containerlarý oluþturuyoruz
+			if("1".equals(actions[i].split(" ")[0])) {   
 				
 				
 				
@@ -110,7 +151,7 @@ public class Main {
 		}      
 		
 		
-		
+		//Printing phase.
 		
 		
 		for(int i = 0 ; i< allPorts.size() ; i++) {

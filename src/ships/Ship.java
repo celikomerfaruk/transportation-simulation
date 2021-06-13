@@ -9,25 +9,84 @@ import java.util.Iterator;
 import containers.Container;
 import interfaces.IShip;
 import ports.Port;
-
+/**
+ * Class that contains fields and methods related to the Ship.
+ * @author celik
+ *
+ */
 public class Ship implements IShip {
+	/**
+	 * ID of the Ship.
+	 */
 	private final int ID ;
+	/**
+	 * The amount of fuel the Ship has.
+	 */
 	private double fuel ;
+	/**
+	 * Port that the ship has located.
+	 */
 	public Port currentPort ;
-	private int totalWeightCapacity;
-	private int maxNumberOfAllContainers;
-	private int maxNumberOfHeavyContainers;
-	private int maxNumberOfRefrigeratedContainers;
-	private int maxNumberOfLiquidContainers;
-	private double fuelConsumptionPerKM ;
+	/**
+	 * Total weight capacity of the Ship.
+	 */
+	final private int totalWeightCapacity;
+	/**
+	 * Maximum number of containers the ship can carry.
+	 */
+	final private int maxNumberOfAllContainers;
+	/**
+	 * Maximum number of heavy containers the ship can carry.
+	 */
+	final private int maxNumberOfHeavyContainers;
+	/**
+	 * Maximum number of refrigerated containers the ship can carry.
+	 */
+	final private int maxNumberOfRefrigeratedContainers;
+	/**
+	 * Maximum number of liquid containers the ship can carry.
+	 */
+	final private int maxNumberOfLiquidContainers;
+	/**
+	 * Fuel consumption of Ship(per KM)
+	 */
+	final private double fuelConsumptionPerKM ;
+	/**
+	 * The amount of weight the ship is currently carrying
+	 */
 	private int currentLiftingWeight;
+	/**
+	 * Number of containers the ship is currently carrying
+	 */
 	private int currentLiftingAllContainers;
+	/**
+	 * Number of heavy containers the ship is currently carrying
+	 */
 	private int currentLiftingHeavyContainers;
+	/**
+	 * Number of refrigerated containers the ship is currently carrying
+	 */
 	private int currentLiftingRefrigeratedContainers;
+	/**
+	 * Number of liquid containers the ship is currently carrying
+	 */
 	private int currentLiftingLiquidContainers;
+	/**
+	 * ArrayList of containers the ship is currently carrying
+	 */
 	public ArrayList<Container> liftingContainers; 
 	
-	
+	/**
+	 * Constructor that creates the Ship object by initializing the required fields.
+	 * @param ID ID of the Ship.
+	 * @param p Port that the ship has located.
+	 * @param totalWeightCapacity Total weight capacity of the Ship.
+	 * @param maxNumberOfAllContainers Maximum number of containers the ship can carry.
+	 * @param maxNumberOfHeavyContainers Maximum number of heavy containers the ship can carry.
+	 * @param maxNumberOfRefrigeratedContainers Maximum number of refrigerated containers the ship can carry.
+	 * @param maxNumberOfLiquidContainers  Maximum number of liquid containers the ship can carry
+	 * @param fuelConsumptionPerKM Fuel consumption of Ship(per KM)
+	 */
 	public Ship(int ID, Port p, int totalWeightCapacity, int maxNumberOfAllContainers, int maxNumberOfHeavyContainers, int maxNumberOfRefrigeratedContainers, int maxNumberOfLiquidContainers, double fuelConsumptionPerKM)
 	{
 		this.ID = ID ;
@@ -47,11 +106,21 @@ public class Ship implements IShip {
 		this.currentLiftingLiquidContainers = 0;
 		liftingContainers = new ArrayList<Container>();
 	}
+	/**
+	 * Returns the ArrayList of containers the ship is currently carrying.
+	 * @return ArrayList of containers the ship is currently carrying
+	 */
 	
 	public ArrayList<Container> getCurrentContainers(){
 		
 		return liftingContainers;
 	}
+	/**
+	 * Checks if the ship can go to the specified port and takes the necessary actions.
+	 * @param p Destination Port.
+	 * @return True if it satisfies the necessary conditions, false if it doesn't
+	 */
+	 
 	public boolean sailTo(Port p) {
 		double containerRates = 0.0;
 		 for(int i = 0 ; i < this.liftingContainers.size() ; i++) {
@@ -66,13 +135,20 @@ public class Ship implements IShip {
 		}
 		return false ;
 	};
-	
+	/**
+	 * Increases the amount of fuel by the given value
+	 * @param newFuel Amount to be added
+	 */
 	public void reFuel(double newFuel) {
 		fuel+= newFuel;
 	};
 	
 	
-	
+	/**
+	 * Checks if the container can be loaded on the ship and takes the necessary actions.
+	 * @param cont Container
+	 * @return True if it satisfies the necessary conditions, false if it doesn't
+	 */
 	public boolean load(Container cont) {
 		if (currentPort.containers.contains(cont)) {
 			if(cont.getWeight()+currentLiftingWeight <= totalWeightCapacity )
@@ -180,15 +256,26 @@ public class Ship implements IShip {
 		return false;
 		
 	}
+	/**
+	 * Allows you to access the id.
+	 * @return ID of the ship.
+	 */
 	
 	public int getID() {
 		return ID ;
 	}
-	
+	/**
+	 * Allows you to access the fuel.
+	 * @return Fuel of the ship.
+	 */
 	public double getFuel() {
 		return fuel ;
 	}
-	
+	/**
+	 * It checks whether the container can be unloaded from the ship and takes the necessary actions.
+	 * @param cont Container.
+	 * @return True if it satisfies the necessary conditions, false if it doesn't
+	 */
 	public boolean unLoad(Container cont) {
 		if (liftingContainers.contains(cont)){
 			if(currentPort.containers.contains(cont) == false) {
