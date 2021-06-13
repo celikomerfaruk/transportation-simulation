@@ -38,48 +38,21 @@ public class Main {
 		// Good Luck!
 		// 
 		
-		/**
-		 * Reads the input file.
-		 */
+		
 		Scanner in = new Scanner(new File(args[0]));
-		/**
-		 * Prints the output file.
-		 */
+		
 		PrintStream out = new PrintStream(new File(args[1]));
-		/**
-		 * ArrayList containing all created ports.
-		 */
 		ArrayList<Port> allPorts = new ArrayList<Port>() ;
-		/**
-		 * ArrayList containing all created ships.
-		 */
 		ArrayList<Ship> allShips = new ArrayList<Ship>() ;
-		/**
-		 * ArrayList containing all created containers.
-		 */
 		ArrayList<Container> allContainers = new ArrayList<Container>()	;	
-		/**
-		 * Number of actions.
-		 */
+		
 		final int actionCount = in.nextInt();
 		in.nextLine();
-		
-		/**
-		 * List of actions line by line.
-		 */
-		
+			
 		String[] actions = new String[actionCount];
-		/**
-		 * Variable that will give id values ​​to containers
-		 */
+		
 		int containerID = 0 ;
-		/**
-		 * Variable that will give id values ​​to ports.
-		 */
 		int portID = 0 ;
-		/**
-		 * Variable that will give id values ​​to ships.
-		 */
 		int shipID = 0;
 		
 		

@@ -19,7 +19,7 @@ public class BasicContainer extends Container{
 	}
 	@Override
 	public double consumption() {
-		return 2.50 ;
+		return 2.50*this.getWeight() ;
 	} 
 	@Override
 	public  String getType() {

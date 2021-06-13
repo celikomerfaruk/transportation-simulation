@@ -124,7 +124,7 @@ public class Ship implements IShip {
 	public boolean sailTo(Port p) {
 		double containerRates = 0.0;
 		 for(int i = 0 ; i < this.liftingContainers.size() ; i++) {
-			 containerRates += ((this.liftingContainers.get(i).consumption())*(this.liftingContainers.get(i).getWeight()));
+			 containerRates += ((this.liftingContainers.get(i).consumption()));
 		 }
 		if (fuel >= ((this.currentPort.getDistance(p))*(this.fuelConsumptionPerKM + containerRates)) ) {
 			fuel -= ((this.currentPort.getDistance(p))*(this.fuelConsumptionPerKM + containerRates)) ;

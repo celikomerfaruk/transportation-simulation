@@ -19,7 +19,7 @@ public class LiquidContainer extends HeavyContainer {
 	}
 	@Override
 	public double consumption() {
-		return 4.00 ;
+		return 4.00 * this.getWeight() ;
 	} 
 	@Override
 	public  String getType() {
