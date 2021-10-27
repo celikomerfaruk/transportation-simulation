@@ -1,5 +1,4 @@
 
-//DO_NOT_EDIT_ANYTHING_ABOVE_THIS_LINE
 
 package ships;
 
@@ -323,5 +322,5 @@ public class Ship implements IShip {
 
 
 
-//DO_NOT_EDIT_ANYTHING_BELOW_THIS_LINE
+
 
